@@ -1,13 +1,8 @@
-#variable "maintenance_window" {
-#  description = "Map of SSM Maintenance Window Settings"
-#  type = any
-#  default = {}
-#}
 
 variable "window_name" {
   description = "Maintenance Window Name"
   type = string
-  default = "PatchingWindow"
+  default = ""
 }
 
 variable "window_description" {
@@ -31,7 +26,7 @@ variable "duration" {
 variable "cutoff" {
   description = "Number of hours before end of Maintenance Window"
   type = number
-  default = 6
+  default = 5
 }
 
 variable "schedule_timzone" {
@@ -43,7 +38,7 @@ variable "schedule_timzone" {
 variable "target_name" {
   description = "Name of the target"
   type = string
-  default = "PatchingWindowTarget"
+  default = ""
 }
 
 variable "target_description" {
@@ -73,7 +68,7 @@ variable "target_values" {
 variable "task_name" {
   description = "SSM Task Name"
   type = string
-  default = "PatchTask"
+  default = ""
 }
 
 variable "task_description" {

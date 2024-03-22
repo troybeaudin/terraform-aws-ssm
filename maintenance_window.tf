@@ -10,12 +10,6 @@ locals {
         notification_events = var.notification_events
         notification_type   = var.notification_type
       }
-      #parameter = [
-      #  {
-      #    name   = "commands"
-      #    values = var.commands
-      #  }
-      #]
     }
     automation_parameters = {
       document_version = var.document_version
@@ -24,6 +18,7 @@ locals {
 }
 
 resource "aws_ssm_maintenance_window" "ssm_window" {
+  count               = var.window_name == "" ? 0 : 1
   name                = var.window_name
   description         = var.window_description
   schedule            = var.schedule
@@ -33,7 +28,8 @@ resource "aws_ssm_maintenance_window" "ssm_window" {
 }
 
 resource "aws_ssm_maintenance_window_target" "ssm_target" {
-  window_id           = aws_ssm_maintenance_window.ssm_window.id
+  window_id           = aws_ssm_maintenance_window.ssm_window[0].id
+  count               = var.target_name == "" ? 0 : 1
   name                = var.target_name
   description         = var.target_description
   resource_type       = var.resource_type
@@ -44,7 +40,8 @@ resource "aws_ssm_maintenance_window_target" "ssm_target" {
 }
 
 resource "aws_ssm_maintenance_window_task" "ssm_task" {
-  window_id           = aws_ssm_maintenance_window.ssm_window.id
+  window_id           = aws_ssm_maintenance_window.ssm_window[0].id
+  count               = var.task_name == "" ? 0 : 1
   name                = var.task_name
   description         = var.task_description
   max_concurrency     = var.max_concurrency
@@ -54,7 +51,7 @@ resource "aws_ssm_maintenance_window_task" "ssm_task" {
   task_type           = var.task_type
   targets {
             key             = var.task_target
-            values          = [aws_ssm_maintenance_window_target.ssm_target.id]
+            values          = [aws_ssm_maintenance_window_target.ssm_target[0].id]
         }
         
   dynamic "task_invocation_parameters" {

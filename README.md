@@ -17,6 +17,7 @@ module "ssm_auto_window" {
   window_description = "Test window for automation"
   task_arn           = "AWS-RestartEC2Instance"
   task_type          = "AUTOMATION"
+  task_name          = "AutomationTask"
   duration           = 6
   cutoff             = 1
   target_name        = "maintenance-window-target"
@@ -42,6 +43,7 @@ module "ssm_run_window" {
   target_description  = "This is a maintenance window target"
   target_key          = "tag: Patch Group"
   target_values       = ["Test", "Dev"]
+  task_name           = "RunCommandTask"
   service_role_arn    = "arn:aws:iam::052659884349:role/aws-elasticbeanstalk-service-role"
   notification_arn    = "arn:aws:sns:us-east-1:052659884349:codecommit-notifications:0d6010b5-cbbd-4462-9dce-5156cdbdb5fd"
   notification_events = ["Failed"]
