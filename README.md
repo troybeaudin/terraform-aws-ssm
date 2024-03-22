@@ -1,33 +1,6 @@
 # AWS VPC Terraform Module
 
-Create features in AWS Systems Manager (SSM)
-
-# Requirements
-
-```hcl
-
-terraform {
-  required_version = "~> 1.0"
-
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 4.40"
-    }
-  }
-}
-```
-
-
-# Resources
-
-The following resources are used in this module:
-
-[aws_ssm_maintenance_window](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ssm_maintenance_window)
-
-[aws_ssm_maintenance_window_target](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ssm_maintenance_window_target)
-
-[aws_ssm_maintenance_window_task](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ssm_maintenance_window_task)
+Create Patch Manager Baselines, Patch Groups, and Maintenance Windows for run commands and automation documents in AWS Systems Manager (SSM)
 
 
 # Usage
@@ -36,7 +9,7 @@ This is an example of a maintenance window
 
 ```hcl
 
-module "ssm__auto_window" {
+module "ssm_auto_window" {
   source = "./terraform-aws-ssm"
 
   schedule           = "cron(00 10 15 4 ? 2023)"
