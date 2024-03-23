@@ -1,4 +1,4 @@
-# AWS VPC Terraform Module
+# AWS SSM Terraform Module
 
 Create Patch Manager Baselines, Patch Groups, and Maintenance Windows for run commands and automation documents in AWS Systems Manager (SSM)
 
